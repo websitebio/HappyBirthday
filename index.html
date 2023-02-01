@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" style="background: rgb(0,208,167);background: rgb(2,0,36);background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 9%, rgba(4,140,167,1) 49%, rgba(9,9,121,1) 81%, rgba(2,0,36,1) 100%);overflow: hiddenscroll-behavior: smooth;color-scheme: dark;">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +8,137 @@
     <title>Happy Birthday!</title>
 </head>
 <body>
-<p, style="width: 100%; height: 100%"> HAPPY BIRTHDAY!!! </p>
+    <script>
+  const canvas = document.createElement("canvas");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight*2;
+  canvas.style.backgroundColor = "rgba(0, 0, 0, 0)";
+  canvas.style.position = "absolute";
+  canvas.style.zIndex = 999;
+  document.body.appendChild(canvas);
+
+  const ctx = canvas.getContext("2d");
+
+  const particleCount = 500;
+  const particles = [];
+
+  class Particle {
+    constructor() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.velocity = {
+        x: (Math.random() - 0.5) * 5,
+        y: Math.random() * -5 - 1,
+      };
+      this.acceleration = {
+        x: 0,
+        y: 0.1,
+      };
+      this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+      this.radius = Math.random() * 2 + 1;
+      this.life = 0;
+      this.lifeMax = Math.random() * 500 + 50;
+    }
+
+    update() {
+      this.velocity.x += this.acceleration.x;
+      this.velocity.y += this.acceleration.y;
+      this.x += this.velocity.x;
+      this.y += this.velocity.y;
+      this.life++;
+      if (this.life >= this.lifeMax) {
+        this.x = Math.random() * canvas.width;
+        this.y = canvas.height;
+        this.velocity = {
+          x: (Math.random() - 0.5) * 5,
+          y: Math.random() * -5 - 1,
+        };
+        this.acceleration = {
+          x: 0,
+          y: 0.1,
+        };
+        this.life = 0;
+      }
+    }
+
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fillStyle = this.color;
+      ctx.fill();
+      ctx.closePath();
+    }
+  }
+
+  for (let i = 0; i < particleCount; i++) {
+    particles.push(new Particle());
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (const particle of particles) {
+      particle.update();
+      particle.draw();
+    }
+    animateConfetti();
+    requestAnimationFrame(animate);
+  }
+        
+function createConfetti() {
+    // create an array to hold the confetti particles
+    confetti = [];
+    // function to create a new confetti particle
+    function ConfettiParticle() {
+        this.x = Math.random() * canvas.width;
+        this.y = 0;
+        this.radius = Math.random() * 10 + 5;
+        this.color = "rgb(" + Math.floor(Math.random() * 255) + "," + Math.floor(Math.random() * 255) + "," + Math.floor(Math.random() * 255) + ")";
+        this.vx = Math.random() * 1 - 1;
+        this.vy = Math.random() * 2 + 5;
+    }
+
+    // create a new confetti particle and add it to the array
+    for (var i = 0; i < 30; i++) {  // quantity of confetti
+        confetti.push(new ConfettiParticle());
+    }
+    // animation loop to move and draw the confetti
+}
+function animateConfetti() {
+    for (var i = 0; i < confetti.length; i++) {
+        var p = confetti[i];
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, 2 * Math.PI);
+        ctx.fillStyle = p.color;
+        ctx.fill();
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.y > canvas.height) {
+            p.y = 0;
+        }
+        ctx.stroke();
+    }
+}
+createConfetti();
+  animate();
+</script>
+<p style="color: black;text-align:center;font-size: 5vw;font-family: fantasy"> HAPPY 27TH BIRTHDAY SABS!!! </p>
+    
+<p style="color: black;text-align:center;font-size: 3vw;font-family: monospace"> At your Age:</p>
+<p style="color: black;text-align:center;font-size: 2vw;font-family: cursive"> - Mozart wrote Rondo alla turca.</p>
+<p style="color: black;text-align:center;font-size: 2vw;font-family: cursive"> - Cosmonaut Yuri Gagarin became the first person in space.</p>
+<p style="color: black;text-align:center;font-size: 2vw;font-family: cursive"> - You are a year older than Steve Wozniak when he co-founded apple</p>
+<p style="color: black;text-align:center;font-size: 2vw;font-family: cursive"> - You are a year younger than Niels Bohr when he published the Atomic Bohr model</p>
+    
+<p style="color: black;text-align:center;font-size: 3vw;font-family: monospace"> You are the oldest you have ever been,</p>
+<p style="color: black;text-align:center;font-size: 3vw;font-family: monospace"> and you are the youngest you will ever be again.</p>
+
+<p style="color: black;text-align:center;font-size: 2vw;font-family: cursive"> The best time to have planted a tree was 10 years ago, the second best time is now.</p>
+    
+<p style="color: black;text-align:center;font-size: 4vw;font-family: cursive"> Have a wonderful day and an exceptional year! Don't forget that small improvements result in large impacts and that large creations are simply the intersection of smaller projects.</p>
+<p style="color: black;text-align:center;font-size: 5vw;font-family: fantasy"> Happy Birthday!!</p>
+    
+    
+
+
 </body>
 </html>
